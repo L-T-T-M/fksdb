@@ -15,8 +15,10 @@ services:
       - ./config/apache.conf:/etc/apache2/sites-available/000-default.conf # site config
       - ./config/php.ini:/usr/local/etc/php/php-local.ini # php config
       - ./config/config.neon:/var/www/fksdb/app/config/config.local.neon # nette config
-      - ./log:/var/www/fksdb/log
+      - ../log:/var/www/fksdb/log
       - ./upload:/var/www/fksdb/upload
+      - ../app:/var/www/fksdb/app
+      
     ports:
       - 8080:80 # opened ports mapping, not needed with proxy
     user: 1000:1000 # expects the main user as uid:pid
@@ -34,3 +36,6 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql # path to dir with database data
       - ./config/mysql.cnf:/etc/mysql/my.cnf # mysql config
+volumes:
+  app:
+  log:
